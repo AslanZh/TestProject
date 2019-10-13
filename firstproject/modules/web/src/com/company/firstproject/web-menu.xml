@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<menu-config xmlns="http://schemas.haulmont.com/cuba/menu.xsd">
+    <menu id="application-firstproject" insertBefore="administration">
+        <item screen="firstproject_Contragents.browse"/>
+        <item screen="firstproject_Adresses.browse"/>
+        <item screen="firstproject_ContactInfo.browse"/>
+        <item screen="firstproject_Roles.browse"/>
+        <item screen="firstproject_Team.browse"/>
+        <item screen="firstproject_Company.browse"/>
+        <item screen="firstproject_MainInformation.browse"/>
+        <item screen="firstproject_Logo.browse"/>
+    </menu>
+</menu-config>

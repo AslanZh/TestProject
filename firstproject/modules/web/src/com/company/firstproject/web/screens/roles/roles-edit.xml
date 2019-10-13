@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        caption="msg://editorCaption"
+        focusComponent="form"
+        messagesPack="com.company.firstproject.web.screens.roles">
+    <data>
+        <instance id="rolesDc"
+                  class="com.company.firstproject.entity.Roles"
+                  view="_local">
+            <loader/>
+        </instance>
+    </data>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="editActions" spacing="true">
+        <form id="form" dataContainer="rolesDc">
+            <column width="250px">
+                <textField id="nameField" property="name"/>
+                <checkBox id="mainField" property="main"/>
+                <dateField id="validityfromField" property="validityfrom"/>
+                <dateField id="validuntilField" property="validuntil"/>
+            </column>
+        </form>
+        <hbox id="editActions" spacing="true">
+            <button action="windowCommitAndClose"/>
+            <button action="windowClose"/>
+        </hbox>
+    </layout>
+</window>

@@ -1,0 +1,2 @@
+alter table FIRSTPROJECT_LOGO add constraint FK_FIRSTPROJECT_LOGO_ON_LOGO foreign key (LOGO_ID) references SYS_FILE(ID);
+create index IDX_FIRSTPROJECT_LOGO_ON_LOGO on FIRSTPROJECT_LOGO (LOGO_ID);

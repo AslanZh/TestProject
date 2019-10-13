@@ -1,0 +1,4 @@
+-- alter table FIRSTPROJECT_CONTRAGENTS add column IMAGE_ID varchar(36) ^
+-- update FIRSTPROJECT_CONTRAGENTS set IMAGE_ID = <default_value> ;
+-- alter table FIRSTPROJECT_CONTRAGENTS alter column IMAGE_ID set not null ;
+--alter table FIRSTPROJECT_CONTRAGENTS add column IMAGE_ID varchar(36) not null ;

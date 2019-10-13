@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        caption="msg://editorCaption"
+        focusComponent="form"
+        messagesPack="com.company.firstproject.web.screens.adresses">
+    <data>
+        <instance id="adressesDc"
+                  class="com.company.firstproject.entity.Adresses"
+                  view="adresses-with-contragents">
+            <loader/>
+        </instance>
+    </data>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="editActions" spacing="true">
+        <form id="form" dataContainer="adressesDc">
+            <column width="250px">
+                <lookupField dataContainer="adressesDc" property="country"/>
+                <textField id="regionField" property="region"/>
+                <textField id="areaField" property="area"/>
+                <textField id="cityField" property="city"/>
+                <textField id="streetField" property="street"/>
+                <textField id="houseField" property="house"/>
+                <textField id="buildingField" property="building"/>
+                <textField id="flatField" property="flat"/>
+            </column>
+        </form>
+        <hbox id="editActions" spacing="true">
+            <button action="windowCommitAndClose"/>
+            <button action="windowClose"/>
+        </hbox>
+    </layout>
+</window>

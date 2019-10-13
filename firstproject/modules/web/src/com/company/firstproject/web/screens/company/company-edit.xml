@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        caption="msg://editorCaption"
+        focusComponent="form"
+        messagesPack="com.company.firstproject.web.screens.company">
+    <data>
+        <instance id="companyDc"
+                  class="com.company.firstproject.entity.Company"
+                  view="_local">
+            <loader/>
+        </instance>
+    </data>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="editActions" spacing="true">
+        <form id="form" dataContainer="companyDc">
+            <column width="250px">
+                <textField id="industryField" property="industry"/>
+                <textField id="incomeField" property="income"/>
+                <dateField id="companyDateField" property="companyDate"/>
+                <textField id="webField" property="web"/>
+                <textField id="participantsField" property="participants"/>
+            </column>
+        </form>
+        <hbox id="editActions" spacing="true">
+            <button action="windowCommitAndClose"/>
+            <button action="windowClose"/>
+        </hbox>
+    </layout>
+</window>

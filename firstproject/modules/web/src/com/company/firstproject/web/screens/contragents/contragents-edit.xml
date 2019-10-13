@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        caption="msg://editorCaption"
+        focusComponent="form"
+        messagesPack="com.company.firstproject.web.screens.contragents">
+    <data>
+        <instance id="contragentsDc"
+                  class="com.company.firstproject.entity.Contragents"
+                  view="contragents-view">
+            <loader id="contragentId"/>
+        </instance>
+        <collection id="adressesesDc" class="com.company.firstproject.entity.Adresses" view="_local">
+            <loader id="addressesId">
+                <query><![CDATA[select e from firstproject_Adresses e
+]]></query>
+            </loader>
+        </collection>
+        <collection id="contactInfoesDc" class="com.company.firstproject.entity.ContactInfo" view="_local">
+            <loader id="contactId">
+                <query><![CDATA[select e from firstproject_ContactInfo e]]></query>
+            </loader>
+        </collection>
+        <collection id="rolesesDc" class="com.company.firstproject.entity.Roles">
+            <loader>
+                <query><![CDATA[select e from firstproject_Roles e ]]></query>
+            </loader>
+        </collection>
+        <collection id="teamsDc" class="com.company.firstproject.entity.Team">
+            <loader id="teamId">
+                <query><![CDATA[select e from firstproject_Team e ]]></query>
+            </loader>
+        </collection>
+        <collection id="companiesDc" class="com.company.firstproject.entity.Company" view="_local">
+            <loader id="companyId">
+                <query><![CDATA[select e from firstproject_Company e]]></query>
+            </loader>
+        </collection>
+        <collection id="mainInformationsDc" class="com.company.firstproject.entity.MainInformation" view="_local">
+            <loader id="infoId">
+                <query><![CDATA[select e from firstproject_MainInformation e ]]></query>
+            </loader>
+        </collection>
+    </data>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="editActions" spacing="true">
+        <grid spacing="true" width="100%">
+            <columns count="3"/>
+            <rows>
+                <row>
+                    <groupBox id="Main" align="TOP_LEFT" width="100%" rowspan="1" colspan="1" spacing="true">
+                        <label value="Name" align="MIDDLE_LEFT"/>
+                        <textField dataContainer="contragentsDc" property="name" editable="false"/>
+                        <checkBox id="activeField" caption="Active" align="MIDDLE_LEFT"
+                                  dataContainer="contragentsDc" property="active"/>
+                        <textField id="rulesField" property="rules" visible="false"/>
+                        <textField id="typeField" property="type" visible="false"/>
+                        <lookupPickerField id="Responsible"
+                                           optionsContainer="teamsDc"
+                                           caption="Responsible" captionProperty="fullname" align="MIDDLE_LEFT">
+                            <actions>
+                                <action id="lookup" type="picker_lookup"/>
+                                <action id="open" type="picker_open"/>
+                            </actions>
+                        </lookupPickerField>
+                    </groupBox>
+                    <groupBox id="Company" caption="Company" width="100%" colspan="1" spacing="true" rowspan="2">
+                        <lookupField id="Industry" caption="Industry"
+                                     optionsEnum="com.company.firstproject.entity.Industry" align="MIDDLE_LEFT"/>
+                        <textField id="Income" caption="Income" dataContainer="companiesDc" property="income"
+                                   align="MIDDLE_LEFT"/>
+                        <lookupField id="Currency" caption="Currency"
+                                     optionsEnum="com.company.firstproject.entity.Currency" align="MIDDLE_LEFT"/>
+                        <dateField id="dateField" caption="Date of Company" dataContainer="companiesDc"
+                                   datatype="date" property="companyDate"/>
+                        <lookupField id="Marketing" caption="Marketing"/>
+                        <lookupField id="Segment" caption="Segment"
+                                     optionsEnum="com.company.firstproject.entity.Segment"/>
+                        <textField id="Webaddress" caption="Web address" dataContainer="companiesDc" property="web"/>
+                        <textField id="participants" caption="Amount of participants" dataContainer="companiesDc"
+                                   property="participants" datatype="string"/>
+                    </groupBox>
+                    <groupBox id="Logo" rowspan="2" colspan="1" caption="Logo" spacing="true" height="300px" width="100%" expand="logoImage">
+                        <image id="logoImage"
+                               caption="Logo"
+                               width="100%"
+                               align="MIDDLE_CENTER" scaleMode="CONTAIN" dataContainer="contragentsDc" property="image">
+                        </image>
+                        <hbox align="BOTTOM_LEFT" spacing="true">
+                            <upload id="uploadField"/>
+                            <button id="clearImageBtn"
+                                    caption="Clear"
+                                    invoke="onClearImageBtnClick"/>
+
+                        </hbox>
+
+
+                    </groupBox>
+                </row>
+                <row>
+                    <groupBox id="information" rowspan="1" colspan="1" caption="Main information" spacing="true"
+                              align="BOTTOM_LEFT">
+                        <textField id="Name" caption="Name" dataContainer="contragentsDc" property="name"
+                                   align="TOP_LEFT"/>
+                        <lookupField id="ownership" caption="Type of ownership" align="TOP_LEFT"/>
+                        <textField id="bin" caption="BIN" dataContainer="mainInformationsDc" property="bin"/>
+                        <checkBox id="Resident" caption="Resident" dataContainer="mainInformationsDc"
+                                  property="resident"/>
+                        <lookupField id="Country" caption="Country of residence"
+                                     optionsEnum="com.company.firstproject.entity.Country"/>
+                    </groupBox>
+                </row>
+            </rows>
+        </grid>
+        <tabSheet>
+            <tab id="address" caption="&#1040;&#1076;&#1088;&#1077;&#1089;&#1072;" margin="true,false,false,false" spacing="true">
+                <table id="adressesTable" height="50%" width="100%" dataContainer="adressesesDc">
+                    <columns>
+                        <column id="country"/>
+                        <column id="region"/>
+                        <column id="area"/>
+                        <column id="city"/>
+                        <column id="street"/>
+                        <column id="house"/>
+                        <column id="building"/>
+                        <column id="flat"/>
+                    </columns>
+                    <actions>
+                        <action id="create" type="create" icon="CREATE_ACTION"/>
+                        <action id="edit" type="edit" icon="EDIT_ACTION"/>
+                        <action id="remove" type="remove" icon="REMOVE_ACTION"/>
+                    </actions>
+                    <buttonsPanel>
+                        <button id="createButton" action="adressesTable.create"/>
+                        <button id="editButton" action="adressesTable.edit"/>
+                        <button id="removeButton" action="adressesTable.remove"/>
+                    </buttonsPanel>
+                </table>
+            </tab>
+            <tab id="info" caption="&#1050;&#1086;&#1085;&#1090;&#1072;&#1082;&#1090;&#1085;&#1072;&#1103; &#1080;&#1085;&#1092;&#1086;&#1088;&#1084;&#1072;&#1094;&#1080;&#1103;" margin="true,false,false,false" spacing="true">
+                <table id="contactInfoTable" height="100px" width="100%" dataContainer="contactInfoesDc">
+                    <columns>
+                        <column id="тип"/>
+                        <column id="значение"/>
+                        <column id="небеспокоить"/>
+                    </columns>
+                    <actions>
+                        <action id="create" icon="CREATE_ACTION" type="create"/>
+                        <action id="edit" icon="EDIT_ACTION" type="edit"/>
+                        <action id="remove" icon="REMOVE_ACTION" type="remove"/>
+                    </actions>
+                    <buttonsPanel>
+                        <button id="create" action="contactInfoTable.create" icon="CREATE_ACTION"/>
+                        <button id="edit" action="contactInfoTable.edit" icon="EDIT_ACTION"/>
+                        <button id="remove" action="contactInfoTable.remove" icon="REMOVE_ACTION"/>
+                    </buttonsPanel>
+                </table>
+            </tab>
+            <tab id="role" caption="&#1056;&#1086;&#1083;&#1100; &#1082;&#1086;&#1085;&#1090;&#1088;&#1072;&#1075;&#1077;&#1085;&#1090;&#1072;" margin="true,false,false,false" spacing="true">
+                <table id="rolesTable" height="100px" width="100%" dataContainer="rolesesDc">
+                    <columns>
+                        <column id="name"/>
+                        <column id="main"/>
+                        <column id="validityfrom"/>
+                        <column id="validuntil"/>
+                    </columns>
+                    <actions>
+                        <action id="create" icon="CREATE_ACTION" type="create"/>
+                        <action id="edit" type="edit" icon="EDIT_ACTION"/>
+                        <action id="remove" type="remove" icon="REMOVE_ACTION"/>
+                    </actions>
+                    <buttonsPanel>
+                        <button id="createRoles" action="rolesTable.create"/>
+                        <button id="editRoles" action="rolesTable.edit"/>
+                        <button id="removeRoles" action="rolesTable.remove"/>
+                    </buttonsPanel>
+                </table>
+            </tab>
+            <tab id="team" caption="&#1050;&#1086;&#1084;&#1072;&#1085;&#1076;&#1072;" margin="true,false,false,false" spacing="true">
+                <table id="teamTable" height="100px" width="100%" dataContainer="teamsDc">
+                    <columns>
+                        <column id="fullname"/>
+                        <column id="role"/>
+                    </columns>
+                    <actions>
+                        <action id="create" type="create"/>
+                        <action id="edit" type="edit"/>
+                        <action id="remove" type="remove"/>
+                    </actions>
+                    <buttonsPanel>
+                        <button id="createTeam" action="teamTable.create"/>
+                        <button id="editTeam" action="teamTable.edit"/>
+                        <button id="removeRemove" action="teamTable.remove"/>
+                    </buttonsPanel>
+                </table>
+            </tab>
+        </tabSheet>
+        <hbox id="editActions" spacing="true">
+            <button action="windowCommitAndClose"/>
+            <button action="windowClose"/>
+        </hbox>
+    </layout>
+</window>

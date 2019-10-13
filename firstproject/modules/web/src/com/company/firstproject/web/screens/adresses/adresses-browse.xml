@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        caption="msg://browseCaption"
+        focusComponent="adressesesTable"
+        messagesPack="com.company.firstproject.web.screens.adresses">
+    <data readOnly="true">
+        <collection id="adressesesDc"
+                    class="com.company.firstproject.entity.Adresses"
+                    view="adresses-with-contragents">
+            <loader id="adressesesDl">
+                <query>
+                    <![CDATA[select e from firstproject_Adresses e]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="adressesesTable"
+            spacing="true">
+        <filter id="filter"
+                applyTo="adressesesTable"
+                dataLoader="adressesesDl">
+            <properties include=".*"/>
+        </filter>
+        <groupTable id="adressesesTable"
+                    width="100%"
+                    dataContainer="adressesesDc">
+            <actions>
+                <action id="create" type="create"/>
+                <action id="edit" type="edit"/>
+                <action id="remove" type="remove"/>
+            </actions>
+            <columns>
+                <column id="country"/>
+                <column id="region"/>
+                <column id="area"/>
+                <column id="city"/>
+                <column id="street"/>
+                <column id="house"/>
+                <column id="building"/>
+                <column id="flat"/>
+            </columns>
+            <rowsCount/>
+            <buttonsPanel id="buttonsPanel"
+                          alwaysVisible="true">
+                <button id="createBtn" action="adressesesTable.create"/>
+                <button id="editBtn" action="adressesesTable.edit"/>
+                <button id="removeBtn" action="adressesesTable.remove"/>
+            </buttonsPanel>
+        </groupTable>
+        <hbox id="lookupActions" spacing="true" visible="false">
+            <button action="lookupSelectAction"/>
+            <button action="lookupCancelAction"/>
+        </hbox>
+    </layout>
+</window>
